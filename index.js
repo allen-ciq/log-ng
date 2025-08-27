@@ -1,9 +1,9 @@
 let Logger;
 
-if(typeof window === 'undefined'){
-	Logger = require('./logger');
+if(process?.versions?.node){
+	Logger = require('./logger.js');
 }else{
-	Logger = require('./blogger').default;
+	Logger = require('./blogger.js').default;
 }
 
 module.exports = Logger;

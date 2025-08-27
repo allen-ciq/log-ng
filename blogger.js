@@ -181,6 +181,7 @@ export function ConsoleTransport(config){
 					*/
 					const [dateStyle, categoryStyle] = merged.style?.length === 2 ? merged.style : ['font-weight: bold; color: green;', 'font-style: italic;'];
 					console[merged.level](`%c${merged.timestamp || new Date().toLocaleTimeString('en-US', merged.dateFmt)}%c %c[${merged.category}]%c ${merged.msg}`, dateStyle, '', categoryStyle, '', ...merged.args || []);
+					// console.log(navigator.userAgent.includes('HeadlessChrome')
 				}
 			}
 		}

@@ -9,8 +9,9 @@
   "scripts": {
     "createCert": "openssl req -new -x509 -newkey rsa:4096 -keyout key.pem -nodes -out cert.pem <<END\nUS\nColorado\nBoulder\nStupid Genius Software\nlocalhost\n\n\nEND",
     "karma": "karma start",
+    "mocha": "mocha --require test.js server.spec.js",
     "start": "npx http-server -S -C cert.pem -K key.pem -p 9876 -c-1",
-    "test": "mocha",
+    "test": "npm run mocha; npm run karma",
     "testServer": "node testServer.js"
   },
   "author": "Stupid Genius Software",

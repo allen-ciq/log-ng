@@ -2,13 +2,12 @@ const chai = require('chai');
 const path = require('path');
 const {PassThrough} = require('stream');
 const {transports} = require('winston');
-const config = require('./config');
-const Logger = require('./logger');
+const Logger = require('./logger.js');
 
 chai.should();
 const {Stream} = transports;
 
-Logger(config);
+Logger({logLevel: 'debug', logFile: 'loggerTest.log'});
 const localLogger = new Logger(path.basename(__filename));
 
 /**

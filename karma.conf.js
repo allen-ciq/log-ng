@@ -11,7 +11,8 @@ module.exports = function(config) {
 		frameworks: ['mocha'],
 		// list of files / patterns to load in the browser
 		files: [
-			'spec.js'
+			'spec.js',
+			'file.spec.js'
 		],
 		// list of files / patterns to exclude
 		exclude: [
@@ -19,7 +20,8 @@ module.exports = function(config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
 		preprocessors: {
-			'spec.js': ['esbuild']
+			'spec.js': ['esbuild'],
+			'file.spec.js': ['esbuild']
 		},
 		esbuild: {
 			target: 'es2022',
@@ -29,13 +31,13 @@ module.exports = function(config) {
 		// possible values: 'dots', 'progress'
 		// available reporters: https://www.npmjs.com/search?q=keywords:karma-reporter
 		reporters: ['mocha'],
-		// protocol: 'https:',
+		protocol: 'https:',
 		// web server port
 		port: 9876,
-		// httpsServerOptions: {
-		// 	key: fs.readFileSync('key.pem'),
-		// 	cert: fs.readFileSync('cert.pem'),
-		// },
+		httpsServerOptions: {
+			key: fs.readFileSync('key.pem'),
+			cert: fs.readFileSync('cert.pem'),
+		},
 		// enable / disable colors in the output (reporters and logs)
 		colors: true,
 		// level of logging
@@ -88,9 +90,9 @@ module.exports = function(config) {
 		},
 		// start these browsers
 		// available browser launchers: https://www.npmjs.com/search?q=keywords:karma-launcher
-		browsers: ['ChromeHeadless', 'FirefoxHeadless'],
+		// browsers: ['ChromeHeadless', 'FirefoxHeadless'],
 		// browsers: ['ChromeHeadlessSecure', 'FirefoxHeadlessSecure'],
-		// browsers: ['ChromeHeadlessSecure'],
+		browsers: ['ChromeHeadlessSecure'],
 		// browsers: ['FirefoxHeadlessSecure'],
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
