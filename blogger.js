@@ -1,4 +1,4 @@
-const levels = ['noop', 'error', 'warn', 'info', 'debug', 'trace'];
+const levels = ['noop', 'error', 'warn', 'info', 'debug', 'trace', 'silly'];
 
 /**
  * A simple logger for use in a browser with different log levels and transport options.
@@ -47,6 +47,8 @@ export default function Logger(filename){
 		if(level === 'noop'){
 			logFn = () => {
 			};
+		}else if(level === 'silly'){
+			logFn = this.log.bind(this, 'trace');
 		}else{
 			logFn = this.log.bind(this, level);
 		}

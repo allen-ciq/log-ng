@@ -41,6 +41,36 @@ describe('Browser Logger', function(){
 		Logger.removeTransport('testTransport');
 		assert.notProperty(Logger.state.transports, 'testTransport');
 	});
+	it('should support "silly" log level', async function(){
+		this.timeout(4000);
+		const expected = 'This is logged at `silly` level';
+		const testTransport = (params) => {
+			assert.equal(params.msg, expected);
+			params.args[0]?.res();
+		};
+		const transportSpy = sinon.spy(testTransport);
+		Logger.addTransport('testTransport', {
+			log: transportSpy
+		});
+
+		await new Promise((res) => {
+			this.UUT.silly(expected, {args: res});
+			setTimeout(res, 1);
+		});
+		assert.isFalse(transportSpy.called, 'Silly log should have been filtered');
+
+		transportSpy.resetHistory();
+
+		Logger.setLogLevel('silly');
+		assert.equal(Logger.level, 'silly');
+
+		await new Promise((res) => {
+			this.UUT.silly(expected, {args: res});
+			setTimeout(res, 1);
+		});
+		assert.isTrue(transportSpy.called);
+		Logger.removeTransport('testTransport');
+	});
 	it('can dynamically change log level', async function(){
 		this.timeout(4000);
 		const expected = 'This is logged at `info` level';
